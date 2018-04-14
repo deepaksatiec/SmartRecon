@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SmartRecon</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="robot.png" class="img-rounded" alt="cute robot">
+        </div>
+        <div class="col-sm-8">
+          <h1 class="display-4">SmartRecon</h1>
+            <p class="lead">the intelligent reconciliation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--<h2>SmartRecon</h2>
+  <p>the intelligent reconciliation</p> -->
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Find the best model</a></li>
+    <li><a data-toggle="tab" href="#menu1">Run a model</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Find the best model</h3>
+      <p>This application uses automated machine learning for algorithm selection, hyperparameter tuning, iterative modeling and model assessment. This application tries to make the machine learning technology accessible to every professional.</p>
+      <p>The performance of the algorithms can be improve with feature engineering. A good knowledge of the business to select and extract the most relevant features is necessary.</p>
+      <p>Auto-sklearn won both the auto and the tweakathon tracks of the ChaLearn AutoML challenge.</p>
+      <h4 class="text-primary">1. Load the data</h4>
+      <p class="text-muted">upload your clean data</p>
+
+        <form method=post enctype=multipart/form-data>
+
+            <input type="file" class="form-control-file" id="file">
+
+
+      <!--<button type="button" class="btn btn-primary pull-right">Button 1</button>-->
+
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <input type=file name=file>
+          <button type="button" class="btn btn-primary">Load</button>
+        </div>
+      </div>
+
+        </form>
+
+
+
+
+      <hr>
+      <h4 class="text-primary">2. Features selection</h4>
+      <p class="text-muted">select the features that you want to keep for the machine learning training and specify the type of your features</p>
+
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="checkbox-inline"><input type="checkbox" value="">column1</label>
+        </div>
+        <div class="form-group">
+          <label for="sel1"></label>
+          <select class="form-control" id="sel1">
+            <option>categorical</option>
+            <option>date</option>
+            <option>continuous</option>
+            <option>label</option>
+          </select>
+        </div>
+      </form>
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="checkbox-inline"><input type="checkbox" value="">column2</label>
+        </div>
+        <div class="form-group">
+          <label for="sel1"></label>
+          <select class="form-control" id="sel1">
+            <option>categorical</option>
+            <option>date</option>
+            <option>continuous</option>
+            <option>label</option>
+          </select>
+        </div>
+      </form>
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="checkbox-inline"><input type="checkbox" value="">column3</label>
+        </div>
+        <div class="form-group">
+          <label for="sel1"></label>
+          <select class="form-control" id="sel1">
+            <option>categorical</option>
+            <option>date</option>
+            <option>continuous</option>
+            <option>label</option>
+          </select>
+        </div>
+      </form>
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="checkbox-inline"><input type="checkbox" value="">column4</label>
+        </div>
+        <div class="form-group">
+          <label for="sel1"></label>
+          <select class="form-control" id="sel1">
+            <option>categorical</option>
+            <option>date</option>
+            <option>continuous</option>
+            <option>label</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-primary">Next</button>
+        </div>
+      </div>
+
+
+      <hr>
+      <h4 class="text-primary">3. Choose your automated machine learning methodology</h4>
+      <div class="radio">
+        <label><input type="radio" name="optradio">auto-sklearn</label>
+      </div>
+      <p class="text-muted">leverages recent advantages in Bayesian optimization, meta-learning and ensemble construction</p>
+      <div class="radio">
+        <label><input type="radio" name="optradio">TPOT</label>
+      </div>
+      <p class="text-muted">use genetic programming</p>
+      <div class="radio">
+        <label><input type="radio" name="optradio">decision tree</label>
+      </div>
+      <p class="text-muted">simplest model with easy-to-read rules to classify</p>
+
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-primary">Run</button>
+        </div>
+      </div>
+
+      <hr>
+      <h4 class="text-primary">4. Save your model</h4>
+      <p class="text-muted">if the accuracy score and the confusion matrix are satisfying, you can save the model to run it later for predictions</p>
+      <p>Accuracy score: 90%</p>
+      <img src="confusion_matrix.jpg" class="img-rounded" alt="confusion matrix">
+
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+
+      <footer class="blockquote-footer text-center"> <footer>
+
+    </div>
+
+
+    <div id="menu1" class="tab-pane fade">
+      <h3>Run a model</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h4>1. Load the data</h4>
+      <hr>
+      <h4>2. Features selection</h4>
+      <hr>
+      <h4>3. Choose your machine learning model</h4>
+      <hr>
+      <h4>4. Download your output</h4>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
