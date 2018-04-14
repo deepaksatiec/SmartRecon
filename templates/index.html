@@ -2,12 +2,21 @@
 <html lang="en">
 <head>
   <title>SmartRecon</title>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </head>
+
 <body>
 
 <div class="container">
@@ -16,177 +25,253 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-center">
           <img src="robot.png" class="img-rounded" alt="cute robot">
         </div>
         <div class="col-sm-8">
           <h1 class="display-4">SmartRecon</h1>
             <p class="lead">the intelligent reconciliation</p>
+            <p class="mute">This application uses automated machine learning for algorithm selection, hyperparameter tuning, iterative modeling and model assessment. This application tries to make the machine learning technology accessible to every professional.</p>
+            <p class="mute">The performance of the algorithms can be improved with feature engineering. A good knowledge of the business to select and extract the most relevant features is necessary.</p>
         </div>
       </div>
     </div>
   </div>
 
-
-  <!--<h2>SmartRecon</h2>
-  <p>the intelligent reconciliation</p> -->
-
   <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Find the best model</a></li>
-    <li><a data-toggle="tab" href="#menu1">Run a model</a></li>
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#model">Find the best model</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#run">Run the model</a>
+    </li>
   </ul>
 
   <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>Find the best model</h3>
-      <p>This application uses automated machine learning for algorithm selection, hyperparameter tuning, iterative modeling and model assessment. This application tries to make the machine learning technology accessible to every professional.</p>
-      <p>The performance of the algorithms can be improve with feature engineering. A good knowledge of the business to select and extract the most relevant features is necessary.</p>
-      <p>Auto-sklearn won both the auto and the tweakathon tracks of the ChaLearn AutoML challenge.</p>
-      <h4 class="text-primary">1. Load the data</h4>
-      <p class="text-muted">upload your clean data</p>
+    <!--first tab content-->
+    <div class="tab-pane active container" id="model">
+    <p> </p>
 
-        <form method=post enctype=multipart/form-data>
-
-            <input type="file" class="form-control-file" id="file">
-
-
-      <!--<button type="button" class="btn btn-primary pull-right">Button 1</button>-->
-
-      <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-            <input type=file name=file>
-          <button type="button" class="btn btn-primary">Load</button>
-        </div>
+    <!--first part - load the data-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">1. Load the data</h4>
       </div>
+      <div class="card-body">
+        <p class="card-text text-muted">upload your clean data</p>
 
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <a href="#" class="btn btn-outline-primary">Upload</a>
+      </div>
+    </div>
+
+    <!--second part - features selection-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">2. Features selection</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">select the features that you want to keep for the machine learning training and specify the type of your features</p>
+
+        <!--column1-->
+        <form class="form-inline">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">column1
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="sel1"></label>
+            <select class="form-control" id="sel1">
+              <option>categorical</option>
+              <option>date</option>
+              <option>continuous</option>
+              <option>label</option>
+            </select>
+          </div>
         </form>
 
+        <!--column2-->
+        <form class="form-inline">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck2">column2
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="sel2"></label>
+            <select class="form-control" id="sel2">
+              <option>categorical</option>
+              <option>date</option>
+              <option>continuous</option>
+              <option>label</option>
+            </select>
+          </div>
+        </form>
 
+        <!--column3-->
+        <form class="form-inline">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+            <label class="form-check-label" for="defaultCheck3">column3
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="sel3"></label>
+            <select class="form-control" id="sel3">
+              <option>categorical</option>
+              <option>date</option>
+              <option>continuous</option>
+              <option>label</option>
+            </select>
+          </div>
+        </form>
 
+        <!--column4-->
+        <form class="form-inline mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+            <label class="form-check-label" for="defaultCheck4">column4
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="sel4"></label>
+            <select class="form-control" id="sel4">
+              <option>categorical</option>
+              <option>date</option>
+              <option>continuous</option>
+              <option>label</option>
+            </select>
+          </div>
+        </form>
 
-      <hr>
-      <h4 class="text-primary">2. Features selection</h4>
-      <p class="text-muted">select the features that you want to keep for the machine learning training and specify the type of your features</p>
-
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="checkbox-inline"><input type="checkbox" value="">column1</label>
-        </div>
-        <div class="form-group">
-          <label for="sel1"></label>
-          <select class="form-control" id="sel1">
-            <option>categorical</option>
-            <option>date</option>
-            <option>continuous</option>
-            <option>label</option>
-          </select>
-        </div>
-      </form>
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="checkbox-inline"><input type="checkbox" value="">column2</label>
-        </div>
-        <div class="form-group">
-          <label for="sel1"></label>
-          <select class="form-control" id="sel1">
-            <option>categorical</option>
-            <option>date</option>
-            <option>continuous</option>
-            <option>label</option>
-          </select>
-        </div>
-      </form>
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="checkbox-inline"><input type="checkbox" value="">column3</label>
-        </div>
-        <div class="form-group">
-          <label for="sel1"></label>
-          <select class="form-control" id="sel1">
-            <option>categorical</option>
-            <option>date</option>
-            <option>continuous</option>
-            <option>label</option>
-          </select>
-        </div>
-      </form>
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="checkbox-inline"><input type="checkbox" value="">column4</label>
-        </div>
-        <div class="form-group">
-          <label for="sel1"></label>
-          <select class="form-control" id="sel1">
-            <option>categorical</option>
-            <option>date</option>
-            <option>continuous</option>
-            <option>label</option>
-          </select>
-        </div>
-      </form>
-
-      <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-primary">Next</button>
-        </div>
+        <a href="#" class="btn btn-outline-primary">Next</a>
       </div>
+    </div>
 
+    <!--third part - choose your model-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">3. Choose your automated machine learning methodology</h4>
+      </div>
+      <div class="card-body">
 
-      <hr>
-      <h4 class="text-primary">3. Choose your automated machine learning methodology</h4>
-      <div class="radio">
-        <label><input type="radio" name="optradio">auto-sklearn</label>
-      </div>
-      <p class="text-muted">leverages recent advantages in Bayesian optimization, meta-learning and ensemble construction</p>
-      <div class="radio">
-        <label><input type="radio" name="optradio">TPOT</label>
-      </div>
-      <p class="text-muted">use genetic programming</p>
-      <div class="radio">
-        <label><input type="radio" name="optradio">decision tree</label>
-      </div>
-      <p class="text-muted">simplest model with easy-to-read rules to classify</p>
-
-      <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-primary">Run</button>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">auto-sklearn
+          </label>
         </div>
-      </div>
+        <p class="text-muted">leverages recent advantages in Bayesian optimization, meta-learning and ensemble construction</p>
+        <p class="text-muted">auto-sklearn won both the auto and the tweakathon tracks of the ChaLearn AutoML challenge</p>
 
-      <hr>
-      <h4 class="text-primary">4. Save your model</h4>
-      <p class="text-muted">if the accuracy score and the confusion matrix are satisfying, you can save the model to run it later for predictions</p>
-      <p>Accuracy score: 90%</p>
-      <img src="confusion_matrix.jpg" class="img-rounded" alt="confusion matrix">
-
-      <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-primary">Save</button>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+          <label class="form-check-label" for="exampleRadios1">TPOT
+          </label>
         </div>
+        <p class="text-muted">use genetic programming</p>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" checked>
+          <label class="form-check-label" for="exampleRadios3">decision tree
+          </label>
+        </div>
+        <p class="text-muted">simplest model with easy-to-read rules to classify</p>
+
+        <a href="#" class="btn btn-outline-primary">Run</a>
       </div>
-
-      <footer class="blockquote-footer text-center"> <footer>
-
     </div>
 
 
-    <div id="menu1" class="tab-pane fade">
-      <h3>Run a model</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <h4>1. Load the data</h4>
-      <hr>
-      <h4>2. Features selection</h4>
-      <hr>
-      <h4>3. Choose your machine learning model</h4>
-      <hr>
-      <h4>4. Download your output</h4>
+    <!--fourth part - save model-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">4. Save your model</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">if the accuracy score and the confusion matrix are satisfying, you can save the model to run it later for predictions</p>
+        <p>Accuracy score: 90%</p>
+        <a href="#" class="btn btn-outline-primary">Save</a>
+      </div>
     </div>
-  </div>
-</div>
 
+    </div><!--end of the first tab-->
+
+    <!--second tab content-->
+    <div class="tab-pane container" id="run">
+    <p> </p>
+
+    <!--first part - load the data-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">1. Load the data</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">upload your clean data</p>
+
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <a href="#" class="btn btn-outline-primary">Upload</a>
+      </div>
+    </div>
+
+    <!--second part - choose your model-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">2. Select your previously saved machine learning algorithm</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">if you do not have a model yet, you should use the first tab</p>
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <a href="#" class="btn btn-outline-primary">Run</a>
+      </div>
+    </div>
+
+
+    <!--third part - download your output-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">3. Download your ouput files</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Statistics:</p>
+        <a href="#" class="btn btn-outline-info">Download your statistics file</a>
+        <a href="#" class="btn btn-outline-primary">Download your output file</a>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    </div><!--end of the second tab-->
+
+
+
+
+
+
+
+  </div><!--end of tabs-->
+
+
+
+
+
+
+</div><!--end of container-->
 </body>
 </html>
