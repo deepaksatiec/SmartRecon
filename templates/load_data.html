@@ -1,0 +1,29 @@
+{% extends 'skeleton.html' %}
+
+{% block content %}
+        <div class="tab-pane active container" id="model">
+
+            <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">1. Load the data</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">upload your clean data</p>
+
+          <form method="post" enctype=multipart/form-data>
+
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile" name="file">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <input type="submit" class="btn btn-outline-primary" value="Upload" name="Upload">
+
+          </form>
+
+      </div>
+    </div>
+
+        </div>
+
+{% endblock %}

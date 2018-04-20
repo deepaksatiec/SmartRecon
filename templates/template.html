@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SmartRecon</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-4 text-center">
+          <img src="/static/robot.png" class="img-rounded" alt="cute robot">
+        </div>
+        <div class="col-sm-8">
+          <h1 class="display-4">SmartRecon</h1>
+            <p class="lead">the intelligent reconciliation</p>
+            <p class="mute">This application uses automated machine learning for algorithm selection, hyperparameter tuning, iterative modeling and model assessment. This application tries to make the machine learning technology accessible to every professional.</p>
+            <p class="mute">The performance of the algorithms can be improved with feature engineering. A good knowledge of the business to select and extract the most relevant features is necessary.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#model">Find the best model</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#run">Run the model</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <!--first tab content-->
+    <div class="tab-pane active container" id="model">
+
+    <!--first part - load the data-->
+
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">1. Load the data</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">upload your clean data</p>
+
+          <form method=post enctype=multipart/form-data>
+
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile" name="file">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <input type="submit" class="btn btn-outline-primary" value="Upload" name="Upload">
+
+          </form>
+
+      </div>
+    </div>
+
+    <!--second part - features selection-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">2. Features selection</h4>
+      </div>
+      <div class="card-body">
+
+      {% if data is defined %}
+      {{ data.to_html(classes="table table-striped")|safe }}
+      {% endif %}
+
+        <p class="card-text text-muted">select the features that you want to keep for the machine learning training and specify the type of your features</p>
+
+        <!--columns -->
+
+          {% for column in headers %}
+
+        <form method="post" class="form-inline">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="{{ column + '_checkbox' }}">
+            <label class="form-check-label" for="defaultCheck1">{{ column }}</label>
+
+          </div>
+          <div class="form-group">
+
+            <label for="sel1"></label>
+            <select class="form-control" id="sel1" name="{{ column }}">
+              <option>categorical</option>
+              <option>date</option>
+              <option>continuous</option>
+              <option>label</option>
+            </select>
+
+          </div>
+
+          {% endfor %}
+        <input type="submit" class="btn btn-outline-primary" value="Next">
+      </form>
+
+      </div>
+    </div>
+
+    <!--third part - choose your model-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">3. Choose your automated machine learning methodology</h4>
+      </div>
+      <div class="card-body">
+
+      <form method="post">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">auto-sklearn
+          </label>
+        </div>
+        <p class="text-muted">leverages recent advantages in Bayesian optimization, meta-learning and ensemble construction</p>
+        <p class="text-muted">auto-sklearn won both the auto and the tweakathon tracks of the ChaLearn AutoML challenge</p>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+          <label class="form-check-label" for="exampleRadios1">TPOT
+          </label>
+        </div>
+        <p class="text-muted">use genetic programming</p>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" checked>
+          <label class="form-check-label" for="exampleRadios3">decision tree
+          </label>
+        </div>
+        <p class="text-muted">simplest model with easy-to-read rules to classify</p>
+
+        <input type="submit" class="btn btn-outline-primary" value="Run">
+
+      </form>
+
+        </div>
+    </div>
+
+
+    <!--fourth part - save model-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">4. Save your model</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">if the accuracy score and the confusion matrix are satisfying, you can save the model to run it later for predictions</p>
+          {%  if score  is defined %}
+        <p>{{ 'Accuracy score: ' + '{0:.0f}%'.format(score*100) }}</p>
+
+          {% endif %}
+
+     <form method="post">
+         <input type="submit" value="Save" class="btn btn-outline-primary">
+      </form>
+
+      </div>
+    </div>
+
+    </div><!--end of the first tab-->
+
+    <!--second tab content-->
+    <div class="tab-pane container" id="run">
+    <p> </p>
+
+    <!--first part - load the data-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">1. Load the data</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">upload your clean data</p>
+
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <a href="#" class="btn btn-outline-primary">Upload</a>
+      </div>
+    </div>
+
+    <!--second part - choose your model-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">2. Select your previously saved machine learning algorithm</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">if you do not have a model yet, you should use the first tab</p>
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <a href="#" class="btn btn-outline-primary">Run</a>
+      </div>
+    </div>
+
+
+    <!--third part - download your output-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">3. Download your ouput files</h4>
+      </div>
+      <div class="card-body">
+
+          {% if chart is defined and chart %}
+
+          {{ chart }}
+
+          {% end if  %}
+
+          <form method="='post">
+        <a href="#" class="btn btn-outline-info">Download your statistics file</a>
+        <a href="#" class="btn btn-outline-primary">Download your output file</a>
+          </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    </div><!--end of the second tab-->
+
+
+
+
+
+
+
+  </div><!--end of tabs-->
+
+
+
+
+
+
+</div><!--end of container-->
+</body>
+</html>

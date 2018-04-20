@@ -1,0 +1,30 @@
+{%  extends 'skeleton.html' %}
+
+{% block content %}
+    <div class="tab-pane active container" id="model">
+
+    <!--third part - download your output-->
+    <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">3. Download your ouput files</h4>
+      </div>
+      <div class="card-body">
+
+          {% if chart is defined and chart %}
+
+          {{ chart|safe }}
+
+          {% endif %}
+
+          <form method="post">
+              <input  type="submit" class="btn btn-outline-info" name="download_statistics" value="Download your statistics file">
+              <input type="submit" class="btn btn-outline-primary" name="download_output" value="Download your output file">
+          </form>
+
+      </div>
+    </div>
+
+
+    </div>
+
+{% endblock %}

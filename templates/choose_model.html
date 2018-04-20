@@ -1,0 +1,45 @@
+{% extends 'skeleton.html' %}
+
+{% block content %}
+
+        <div class="tab-pane active container" id="model">
+
+        <div class="card bg-light mb-4">
+      <div class="card-header">
+        <h4 class="text-primary">3. Choose your automated machine learning methodology</h4>
+      </div>
+      <div class="card-body">
+
+      <form method="post">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">auto-sklearn
+          </label>
+        </div>
+        <p class="text-muted">leverages recent advantages in Bayesian optimization, meta-learning and ensemble construction</p>
+        <p class="text-muted">auto-sklearn won both the auto and the tweakathon tracks of the ChaLearn AutoML challenge</p>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked>
+          <label class="form-check-label" for="exampleRadios1">TPOT
+          </label>
+        </div>
+        <p class="text-muted">use genetic programming</p>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" checked>
+          <label class="form-check-label" for="exampleRadios3">decision tree
+          </label>
+        </div>
+        <p class="text-muted">simplest model with easy-to-read rules to classify</p>
+
+        <input type="submit" class="btn btn-outline-primary" value="Run">
+
+      </form>
+
+        </div>
+    </div>
+
+        </div>
+
+{% endblock %}

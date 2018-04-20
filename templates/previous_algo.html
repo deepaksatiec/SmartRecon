@@ -1,0 +1,32 @@
+{%  extends 'skeleton.html' %}
+
+{% block content %}
+    <div class="tab-pane active container" id="model">
+
+    <!--second part - choose your model-->
+    <div class="card bg-light mb-4">
+
+
+
+      <div class="card-header">
+        <h4 class="text-primary">2. Select your previously saved machine learning algorithm</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-muted">if you do not have a model yet, you should use the first tab</p>
+
+          <form method="post" enctype=multipart/form-data>
+
+        <div class="custom-file mb-3">
+          <input type="file" class="custom-file-input" id="customFile" name="file">
+          <label class="custom-file-label" for="customFile">Choose file
+          </label>
+        </div>
+        <input class="btn btn-outline-primary" type="submit" name="run" value="Run">
+
+          </form>
+      </div>
+    </div>
+
+    </div>
+
+{% endblock %}
