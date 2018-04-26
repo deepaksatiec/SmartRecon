@@ -11,10 +11,10 @@ import plotly.offline as offplot
 import plotly.graph_objs as go
 
 ALLOWED_EXTENSIONS = ['csv', 'txt', 'xlsx']
-UPLOAD_FOLDER = './upload'
-TEMP_FOLDER = './temp'
-DATA_FOLDER = './data'
-OUTPUT_FOLDER = './output'
+UPLOAD_FOLDER = 'upload'
+TEMP_FOLDER = 'temp'
+DATA_FOLDER = 'data'
+OUTPUT_FOLDER = 'output'
 
 app = Flask(__name__)
 

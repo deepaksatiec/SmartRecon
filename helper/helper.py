@@ -13,7 +13,7 @@ def read_file(filename, UPLOAD_FOLDER):
     path = os.path.join(UPLOAD_FOLDER, filename)
 
     if file_format == 'csv':
-        file = pd.read_csv(path)
+        file = pd.read_csv(path, engine='python', sep=None)
 
     elif file_format == 'xlsx':
         file = pd.read_excel(path)
