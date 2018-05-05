@@ -1,32 +1,53 @@
-{%  extends 'skeleton.html' %}
+{% extends 'skeleton.html' %}
 
 {% block content %}
-    <div class="tab-pane active container" id="model">
 
-    <!--second part - choose your model-->
-    <div class="card bg-light mb-4">
+    <main role="main">
+
+        <div class="container">
+
+            <div class="progress mb-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
+            </div>
 
 
+            <div class="tab-pane active container" id="model">
 
-      <div class="card-header">
-        <h4 class="text-primary">2. Select your previously saved machine learning algorithm</h4>
-      </div>
-      <div class="card-body">
-        <p class="card-text text-muted">if you do not have a model yet, you should use the first tab</p>
+                <!--second part - choose your model-->
+                <div class="card bg-light mb-4">
 
-          <form method="post" enctype=multipart/form-data>
 
-        <div class="custom-file mb-3">
-          <input type="file" class="custom-file-input" id="customFile" name="file">
-          <label class="custom-file-label" for="customFile">Choose file
-          </label>
+                    <div class="card-header">
+                        <h4 class="text-primary">2. Select your previously saved machine learning algorithm</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-muted">if you do not have a model yet, you should use the first tab</p>
+
+                        <form method="post" enctype=multipart/form-data>
+
+                            <!-- input file -->
+                            {% block file_input %}
+                                {{ super() }}
+                            {% endblock %}
+
+                            <!-- flash message -->
+                            {% block flash %}
+                                {{ super() }}
+                            {% endblock %}
+
+                            <input type="submit" class="btn btn-outline-secondary" value="Back" name="Back">
+                            <input class="btn btn-outline-primary" type="submit" name="run" value="Run">
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
-        <input class="btn btn-outline-primary" type="submit" name="run" value="Run">
+    </main>
 
-          </form>
-      </div>
-    </div>
-
-    </div>
 
 {% endblock %}

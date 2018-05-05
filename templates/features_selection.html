@@ -2,51 +2,83 @@
 
 {% block content %}
 
-        <div class="tab-pane active container" id="model">
 
-        <div class="card bg-light mb-4">
-      <div class="card-header">
-        <h4 class="text-primary">2. Features selection</h4>
-      </div>
-      <div class="card-body">
+    <main role="main">
 
-      <div class="table-responsive">
-      {% if data is defined %}
-      {{ data.to_html(classes="table table-sm table-striped")|safe }}
-      {% endif %}
-      </div>
+        <div class="container">
 
-        <p class="card-text text-muted">select the features that you want to keep for the machine learning training and specify the type of your features</p>
+            <div class="progress mb-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
+            </div>
 
-        <!--columns -->
 
-          {% for column in headers %}
+            <div class="tab-pane active container" id="model">
 
-        <form method="post" class="form-inline">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="{{ column + '_checkbox' }}">
-            <label class="form-check-label" for="defaultCheck1">{{ column }}</label>
+                <div class="card bg-light mb-4">
+                    <div class="card-header">
+                        <h4 class="text-primary">2. Features selection</h4>
+                    </div>
+                    <div class="card-body">
 
-          </div>
-          <div class="form-group">
+                        <div class="table-responsive mb-3">
+                            {% if table is defined %}
+                                {{ table|safe }}
+                            {% endif %}
+                        </div>
 
-            <label for="sel1"></label>
-            <select class="form-control" id="sel1" name="{{ column }}">
-              <option>categorical</option>
-              <option>date</option>
-              <option>continuous</option>
-              <option>label</option>
-            </select>
+                        <p class="card-text text-muted">select the features that you want to keep for the machine
+                            learning training and specify the type of your features</p>
 
-          </div>
+                        <!-- flash message -->
+                        {% block flash %}
+                            {{ super() }}
+                            {% block error_title %} Wrong selection {% endblock %}
+                        {% endblock %}
 
-          {% endfor %}
-        <input type="submit" class="btn btn-outline-primary" value="Next">
-      </form>
+                        <form method="post">
+                            {% for column in headers %}
 
-      </div>
-    </div>
-        
+
+                                <div class="form-row form-group align-items-center">
+
+                                    <div class="col-sm-3 form-check">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="{{ column + '_checkbox' }}">
+                                            <label class="form-check-label" for="defaultCheck1">{{ column }}</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class=" form-group col-sm-3">
+                                        <label for="sel1"></label>
+                                        <select class="form-control form-control-sm" id="sel1" name="{{ column }}">
+                                            <option>categorical</option>
+                                            <option>date</option>
+                                            <option>continuous</option>
+                                            <option>target</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+
+                            <input type="submit" class="btn btn-outline-secondary" value="Back" name="Back">
+                            <input type="submit" class="btn btn-outline-primary" value="Next">
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
+    </main>
+
 
 {% endblock %}

@@ -1,23 +1,76 @@
 {% extends 'skeleton.html' %}
 
 {% block content %}
-    <div class="container">
 
-    <div class="row">
-         <div class="col-sm">
-         </div>
 
-        <div class="col-sm">
-        <a href="{{ url_for('load_data', context='find_model')}}" class="btn btn-outline-info btn-lg" >Find the best model</a>
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">the intelligent reconciliation</h1>
+            <p class="lead">This application uses automated machine learning for algorithm selection, hyperparameter
+                tuning, iterative modeling and model assessment. This application tries to make the machine learning
+                technology accessible to every professional.</p>
+            <p class="lead">The performance of the algorithms can be improved with feature engineering. A good knowledge
+                of the business to select and extract the most relevant features is necessary.</p>
         </div>
-
-        <div class="col-sm">
-        <a href="{{ url_for('load_data', context='run_model') }}" class="btn btn-outline-primary btn-lg" >Run the model</a>
-        </div>
-
-        <div class="col-sm">
-        </div>
-
     </div>
-    </div>
+
+
+
+
+    <main role="main">
+
+        <div class="container">
+
+
+            <div class="row">
+
+                <div class="col">
+                </div>
+                <div class="col-6">
+
+
+                    <div class="card-deck">
+                        <div class="card text-center" style="max-width: 300px;">
+                            <img class="card-img-top" src="/static/image/AI.png" alt="Card image cap">
+                            <div class="card-body">
+                                <a href="{{ url_for('load_data', context='find_model') }}"
+                                   class="btn btn-outline-primary btn-lg">Find the best model</a>
+                                <p class="card-text">
+                                    <small class="text-muted"></small>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card text-center" style="max-width: 300px;">
+                            <img class="card-img-top" src="/static/image/AI2.png" alt="Card image cap">
+                            <div class="card-body">
+                                <a href="{{ url_for('load_data', context='run_model') }}"
+                                   class="btn btn-outline-primary btn-lg">Run the model</a>
+                                <p class="card-text">
+                                    <small class="text-muted"></small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col">
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+
+
+
 {% endblock %}

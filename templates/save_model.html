@@ -1,26 +1,73 @@
 {% extends 'skeleton.html' %}
 
 {% block content %}
-        <div class="tab-pane active container" id="model">
 
-        <div class="card bg-light mb-4">
-      <div class="card-header">
-        <h4 class="text-primary">4. Save your model</h4>
-      </div>
-      <div class="card-body">
-        <p class="card-text text-muted">if the accuracy score and the confusion matrix are satisfying, you can save the model to run it later for predictions</p>
-          {%  if score  is defined %}
-        <p>{{ 'Accuracy score: ' + '{0:.0f}%'.format(score*100) }}</p>
 
-          {% endif %}
+    <main role="main">
 
-     <form method="post">
-         <input type="submit" value="Save" class="btn btn-outline-primary">
-      </form>
+        <div class="container">
 
-      </div>
-    </div>
-        
+            <div class="progress mb-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
+            </div>
+
+
+            <div class="tab-pane active container" id="model">
+
+                <div class="card bg-light mb-4">
+                    <div class="card-header">
+                        <h4 class="text-primary">4. Save your model</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-muted">if the accuracy score and the confusion matrix are satisfying,
+                            you can save the model to run it later for predictions</p>
+
+                        {% if session['exec_time']  is defined %}
+                            <p>Time to train the model on the entire data-set: {{ session['exec_time'] }}</p>
+                        {% endif %}
+
+                        {% if session['cv_score']  is defined %}
+                            <p>{{ 'Cross validation score: ' + '{0:.0f}%'.format(session['cv_score']*100) }}</p>
+                        {% endif %}
+
+                        {% if session['k_folds_score']  is defined %}
+                            <p>{{ 'Average k_folds_score validation score: ' + '{0:.0f}%'.format(session['k_folds_score']*100) }}</p>
+                        {% endif %}
+
+                        {% if cm is defined %}
+                            <h4 class="text-center">Confusion matrix</h4>
+                            {{ cm|safe }}
+                        {% endif %}
+
+                        {% if param_table is defined %}
+                            <div class="table-responsive mb-3">
+                                <h4 class="text-left">Model parameters:</h4>
+                                {{ param_table|safe }}
+                            </div>
+                        {% endif %}
+
+                        <form method="post">
+                            <input type="submit" class="btn btn-outline-secondary" value="Back" name="Back">
+                            <a href="{{ url_for('static', filename='temp/' + config['PICKLE_FILE']) }}"
+                               class="btn btn-outline-primary"
+                               onclick="ga('send', 'event', 'Getting started', 'Download', 'Download Bootstrap');">Save
+                                the model</a>
+                            <a href=" {{ url_for('static', filename='temp/' + config['PARAM_TABLE']) }}"
+                               class="btn btn-outline-info"
+                               onclick="ga('send', 'event', 'Getting started', 'Download', 'Download Bootstrap');"> Save
+                                the model information</a>
+                        </form>
+                    </div>
+
+                    {% block flash %}
+                        {{ super() }}
+                    {% endblock %}
+
+                </div>
+            </div>
+
         </div>
+    </main>
 
 {% endblock %}
