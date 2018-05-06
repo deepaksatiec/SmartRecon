@@ -27,8 +27,16 @@
                             <p>Time to train the model on the entire data-set: {{ session['exec_time'] }}</p>
                         {% endif %}
 
-                        {% if session['cv_score']  is defined %}
-                            <p>{{ 'Cross validation score: ' + '{0:.0f}%'.format(session['cv_score']*100) }}</p>
+                        {% if session['accuracy_score']  is defined %}
+                            <p>{{ 'Cross validation accurary score: ' + '{0:.0f}%'.format(session['accuracy_score']*100) }}</p>
+                        {% endif %}
+
+                        {% if session['precision_score']  is defined %}
+                            <p>{{ 'Cross validation precision_score: ' + '{0:.0f}%'.format(session['precision_score']*100) }}</p>
+                        {% endif %}
+
+                        {% if session['recall_score']  is defined %}
+                            <p>{{ 'Cross validation recall_score: ' + '{0:.0f}%'.format(session['recall_score']*100) }}</p>
                         {% endif %}
 
                         {% if session['k_folds_score']  is defined %}

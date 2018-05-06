@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 from sklearn.model_selection import StratifiedKFold, train_test_split, cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -112,19 +112,25 @@ class MachineLearningEngine:
 
         return pipeline
 
-    def cv_score(self, estimator, random_state=42, test_size=0.2, normalize=False):
+    def cv_metrics(self, estimator, random_state=42, test_size=0.2, normalize=False):
         X_train_, X_test_, y_train_, y_test_ = train_test_split(self.X, self.y, test_size=test_size,
                                                                 random_state=random_state)
         fitted_estimator = estimator.fit(X=X_train_, y=y_train_)
         y_pred = fitted_estimator.predict(X_test_)
-        score = accuracy_score(y_true=y_test_, y_pred=y_pred)
-        conf_matrix = confusion_matrix(y_true=y_test_, y_pred=y_pred)
+
+        metrics = {
+            metric.__name__: metric.__call__(y_test_, y_pred)
+            for metric in [accuracy_score, precision_score, recall_score, confusion_matrix]
+        }
 
         if normalize:
-            conf_matrix = conf_matrix.astype('float') / conf_matrix.sum(axis=1)[:, np.newaxis]
-            conf_matrix = np.around(conf_matrix, 2)
+            cm = metrics[confusion_matrix.__name__]
+            cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+            cm = np.around(cm, 2)
+            metrics[confusion_matrix.__name__] = cm
 
-        return score, conf_matrix.tolist()
+        metrics[confusion_matrix.__name__] = metrics[confusion_matrix.__name__].tolist()
+        return metrics
 
     def k_folds_score(self, estimator, n_splits=5, random_state=42):
         cross_validation = StratifiedKFold(n_splits=n_splits, random_state=random_state)

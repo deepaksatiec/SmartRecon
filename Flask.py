@@ -181,8 +181,8 @@ def choose_method(context):
                      'target': target}, file_path)
 
         # classic cv score
-        session['cv_score'], session['confusion_matrix'] = ml_engine.cv_score(best_estimator,
-                                                                              normalize=app.config['CM_NORMALIZE'])
+        metrics = ml_engine.cv_metrics(best_estimator, normalize=app.config['CM_NORMALIZE'])
+        session.update(metrics)
 
         # cross validation score
         session['k_folds_score'] = ml_engine.k_folds_score(estimator=best_estimator, n_splits=5)
