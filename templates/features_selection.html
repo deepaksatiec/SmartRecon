@@ -33,7 +33,11 @@
                         <!-- flash message -->
                         {% block flash %}
                             {{ super() }}
+
+                            {%  if get_flashed_messages() %}
                             {% block error_title %} Wrong selection {% endblock %}
+                            {% endif %}
+
                         {% endblock %}
 
                         <form method="post">
