@@ -34,7 +34,7 @@
 
                     <div class="card-deck">
                         <div class="card text-center" style="max-width: 300px;">
-                            <img class="card-img-top" src="/static/image/AI.png" alt="Card image cap">
+                            <img class="card-img-top" src="{{ url_for('static', filename="image/AI.png") }}" alt="Card image cap">
                             <div class="card-body">
                                 <a href="{{ url_for('load_data', context='find_model') }}"
                                    class="btn btn-outline-primary btn-lg">Find the best model</a>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="card text-center" style="max-width: 300px;">
-                            <img class="card-img-top" src="/static/image/AI2.png" alt="Card image cap">
+                            <img class="card-img-top" src="{{ url_for('static', filename="image/AI2.png") }}" alt="Card image cap">
                             <div class="card-body">
                                 <a href="{{ url_for('load_data', context='run_model') }}"
                                    class="btn btn-outline-primary btn-lg">Run the model</a>

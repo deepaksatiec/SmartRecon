@@ -92,7 +92,7 @@
 
 <nav class="navbar navbar-light bg-light" style="background-color: aliceblue">
     <a class="navbar-brand" href={{ url_for('index') }}>
-        <img src="/static/image/robot.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="{{ url_for('static', filename='image/robot.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
         SmartRecon
     </a>
 </nav>

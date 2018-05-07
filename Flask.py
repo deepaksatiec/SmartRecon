@@ -14,7 +14,7 @@ import filters
 
 from helper import allowed_file, read_file, format_duration, render_table, MachineLearningEngine
 
-# Constants 
+# Constants
 consts = dict(
 
     ALLOWED_EXTENSIONS=['csv', 'txt', 'xlsx'],
