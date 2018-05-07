@@ -23,6 +23,10 @@ P = 2  # Power parameter for the Minkowski metric
 
 
 class MachineLearningEngine:
+    """
+    Engine with machine learning capabilities.
+
+    """
 
     def __init__(self, X: pd.DataFrame, feat_types, y=None):
 
@@ -77,6 +81,12 @@ class MachineLearningEngine:
         return self._MaxAbsScaler
 
     def pipeline(self, algo):
+        """
+        A custom pipeline for demo purpose.
+
+        :param algo: str, either 'knn',  'decision_tree' or 'tpot'.
+        :return: a sklearn.pipeline.Pipeline object.
+        """
 
         if algo not in AVAILABLE_ALGO:
             raise ValueError('{0} wrong algo. Must be either {1}.'.format(algo, ' ,'.join(AVAILABLE_ALGO)))
@@ -113,6 +123,15 @@ class MachineLearningEngine:
         return pipeline
 
     def cv_metrics(self, estimator, random_state=42, test_size=0.2, normalize=False):
+        """
+        A dict of score/ metrics of the estimator performance on the test-set.
+
+        :param estimator: any estimator
+        :param random_state: int, default 42
+        :param test_size: float, default 0.2
+        :param normalize: boolean, default False. Normalize the confusion matrix.
+        :return: dict composed of accuracy_score, precision_score, recall_score, confusion_matrix
+        """
         X_train_, X_test_, y_train_, y_test_ = train_test_split(self.X, self.y, test_size=test_size,
                                                                 random_state=random_state)
         fitted_estimator = estimator.fit(X=X_train_, y=y_train_)
@@ -150,27 +169,3 @@ class MachineLearningEngine:
     def predict(self, estimator):
         return estimator.predict(self.X)
 
-
-# ===== TEST =======================================
-if __name__ == '__main__':
-    from sklearn.model_selection import train_test_split
-
-    path = r"G:\Drive d'équipe\SmartRecon\Flask\data\family_actions.csv"
-    df = pd.read_csv(open(path, 'r', encoding='utf8'))
-    df = df[df['Action Amount'] >= 0]
-
-    from collections import defaultdict
-    from sklearn.preprocessing import LabelEncoder
-
-    d = defaultdict(LabelEncoder)
-    df = df.apply(lambda x: d[x.name].fit_transform(x) if not np.issubdtype(x.dtype, np.number) else x)
-    X, y = df[['Item', 'GOP', 'Family', 'Before Amount']], df['Action']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, shuffle=True)
-    feat_types = {'Item': 'Categorical',
-                  'GOP': 'Categorical',
-                  'Family': 'Categorical',
-                  'Before Amount': 'Other',
-                  'Action': 'Other'}
-    engine = MachineLearningEngine(X=X, y=y, feat_types=feat_types)
-
-    pipe = engine.pipeline('decision_tree')

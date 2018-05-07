@@ -2,6 +2,11 @@ from sklearn.preprocessing import LabelEncoder
 
 
 class MultiColumnLabelEncoder:
+    """
+    Encode labels with value between 0 and n_classes-1.
+
+    Credit: https://stackoverflow.com/a/30267328/7235865
+    """
     def __init__(self, columns=None):
         self.columns = columns  # array of column names to encode
 
@@ -9,11 +14,11 @@ class MultiColumnLabelEncoder:
         return self  # not relevant here
 
     def transform(self, X):
-        '''
+        """
         Transforms columns of X specified in self.columns using
         LabelEncoder(). If no columns specified, transforms all
         columns in X.
-        '''
+        """
         output = X.copy()
         if self.columns is not None:
             for col in self.columns:

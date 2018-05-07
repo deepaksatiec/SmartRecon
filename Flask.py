@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import time
 from flask import Flask, render_template, request, flash, redirect, url_for, g, session
-from helper import allowed_file, read_file, format_duration, render_table, MachineLearningEngine
 from werkzeug.utils import secure_filename
 from collections import defaultdict
 from sklearn.externals import joblib
@@ -12,6 +11,8 @@ import plotly.offline as offplot
 import plotly.graph_objs as go
 import plotly.figure_factory as ff
 import filters
+
+from helper import allowed_file, read_file, format_duration, render_table, MachineLearningEngine
 
 # Constants 
 consts = dict(
@@ -49,6 +50,7 @@ def index():
 
 @app.route('/<context>/load_data', methods=['GET', 'POST'])
 def load_data(context):
+
     if request.method == 'GET':
         return render_template('load_data.html')
 
@@ -271,7 +273,12 @@ def previous_algo(context):
 
         data = read_file(session['filename'], app.config['UPLOAD_FOLDER'])
 
-        ml_engine = MachineLearningEngine(X=data[features], y=data[target], feat_types=feat_types)
+        if target in data.columns:
+            y_true = data[target]
+        else:
+            y_true = None
+
+        ml_engine = MachineLearningEngine(X=data[features], y=y_true, feat_types=feat_types)
         y_pred = pd.DataFrame(ml_engine.predict(estimator), columns=[target + ' predicted'])
 
         output_data = pd.concat([data, y_pred], axis=1)

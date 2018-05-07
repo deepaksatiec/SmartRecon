@@ -33,6 +33,15 @@ def format_duration(seconds):
 
 
 def render_table(df, **kwargs):
+    """
+    Convert a pandas DataFrame to a Bootstrap html table.
+
+    See: http://bootstrap-table.wenzhixin.net.cn/getting-started/
+    :param df: pd.DataFrame
+    :param kwargs: table options available here: http://bootstrap-table.wenzhixin.net.cn/documentation/
+    :return: html string.
+    """
+
     if not isinstance(df, pd.DataFrame):
         df = pd.DataFrame(df)
 

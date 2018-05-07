@@ -9,7 +9,7 @@
 
             <div class="progress mb-4">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
+                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
             </div>
 
 
@@ -23,14 +23,22 @@
 
                         <form method="post">
 
-                            <!-- autosklearn -->
+                            <!-- K Nearest Neighbor -->
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="model_select" id="exampleRadios1"
-                                       value="auto_sklearn">
-                                <label class="form-check-label" for="auto_sklearn">auto-sklearn
+                                <input class="form-check-input" type="radio" name="model_select" id="exampleRadios3"
+                                       value="knn" checked>
+                                <label class="form-check-label" for="knn">k-nearest neighbor
                                 </label>
-                                <p class="text-muted">leverages recent advantages in Bayesian optimization,
-                                    meta-learning and ensemble construction</p>
+                                <p class="text-muted">slower to fit but easy to interpret</p>
+                            </div>
+
+                            <!-- Decision tree -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="model_select" id="exampleRadios4"
+                                       value="decision_tree">
+                                <label class="form-check-label" for="decision_tree">decision tree
+                                </label>
+                                <p class="text-muted">easy to interpret</p>
                             </div>
 
                             <!-- tpot -->
@@ -39,26 +47,17 @@
                                        value="tpot">
                                 <label class="form-check-label" for="tpot">TPOT
                                 </label>
-                            </div>
-                            <p class="text-muted">use genetic programming</p>
-
-
-                            <!-- K Nearest Neighbor -->
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="model_select" id="exampleRadios3"
-                                       value="knn" checked>
-                                <label class="form-check-label" for="knn">One nearest neighbor
-                                </label>
-                                <p class="text-muted">Slower to fit but easy to interpret</p>
+                                <p class="text-muted">use genetic programming</p>
                             </div>
 
-                            <!-- Decision tree -->
+                            <!-- autosklearn -->
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="model_select" id="exampleRadios4"
-                                       value="decision_tree">
-                                <label class="form-check-label" for="decision_tree">Decision tree
+                                <input class="form-check-input" type="radio" name="model_select" id="exampleRadios1"
+                                       value="auto_sklearn">
+                                <label class="form-check-label" for="auto_sklearn">auto-sklearn
                                 </label>
-                                <p class="text-muted">simplest model with easy-to-read rules to classify</p>
+                                <p class="text-muted">leverages recent advantages in Bayesian optimization,
+                                    meta-learning and ensemble construction - Linux only</p>
                             </div>
 
 

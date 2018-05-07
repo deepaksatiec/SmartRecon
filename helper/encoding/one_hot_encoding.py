@@ -61,76 +61,22 @@ def _transform_selected(X, transform, selected="all", copy=True):
 class OneHotEncoder(BaseEstimator, TransformerMixin):
     """Encode categorical integer features using a one-hot aka one-of-K scheme.
 
-    The input to this transformer should be a matrix of integers, denoting
-    the values taken on by categorical (discrete) features. The output will be
-    a sparse matrix were each column corresponds to one possible value of one
-    feature. It is assumed that input features take on values in the range
-    [0, n_values).
+        A custom sklearn OneHotEncoder implementation with a minimum_fraction parameter.
 
-    This encoding is needed for feeding categorical data to many scikit-learn
-    estimators, notably linear models and SVMs with the standard kernels.
+        Credit: http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+        https://github.com/automl/auto-sklearn/blob/development/autosklearn/pipeline/implementations/OneHotEncoder.py
 
-    Parameters
-    ----------
-
-    categorical_features: "all" or array of indices or mask
-        Specify what features are treated as categorical.
-
-        - 'all' (default): All features are treated as categorical.
-        - array of indices: Array of categorical feature indices.
-        - mask: Array of length n_features and with dtype=bool.
-
-        Non-categorical features are always stacked to the right of the matrix.
-
-    dtype : number type, default=np.float
-        Desired dtype of output.
-
-    sparse : boolean, default=True
-        Will return sparse matrix if set True else will return an array.
-
-    Attributes
-    ----------
-    `active_features_` : array
-        Indices for active features, meaning values that actually occur
-        in the training set. Only available when n_values is ``'auto'``.
-
-    `feature_indices_` : array of shape (n_features,)
-        Indices to feature ranges.
-        Feature ``i`` in the original data is mapped to features
-        from ``feature_indices_[i]`` to ``feature_indices_[i+1]``
-        (and then potentially masked by `active_features_` afterwards)
-
-    `n_values_` : array of shape (n_features,)
-        Maximum number of values per feature.
-
-    Examples
-    --------
-    Given a data with three features and two samples, we let the encoder
-    find the maximum value per feature and transform the data to a binary
-    one-hot encoding.
-
-    >>> from sklearn.preprocessing import OneHotEncoder
-    >>> enc = OneHotEncoder()
-    >>> enc.fit([[0, 0, 3], [1, 1, 0], [0, 2, 1], \
-[1, 0, 2]])  # doctest: +ELLIPSIS
-    OneHotEncoder(categorical_features='all', dtype=<... 'float'>,
-           sparse=True, minimum_fraction=None)
-    >>> enc.n_values_
-    array([2, 3, 4])
-    >>> enc.feature_indices_
-    array([0, 2, 5, 9])
-    >>> enc.transform([[0, 1, 1]]).toarray()
-    array([[ 1.,  0.,  0.,  1.,  0.,  0.,  1.,  0.,  0.]])
-
-    See also
-    --------
-    sklearn.feature_extraction.DictVectorizer : performs a one-hot encoding of
-      dictionary items (also handles string-valued features).
-    sklearn.feature_extraction.FeatureHasher : performs an approximate one-hot
-      encoding of dictionary items or strings.
     """
 
     def __init__(self, categorical_features="all", dtype=np.float, sparse=True, minimum_fraction=None):
+        """
+
+        :param categorical_features:
+        :param dtype:
+        :param sparse:
+        :param minimum_fraction: only apply OHE to values within features that comprise some minimum fraction of the
+        feature's total.
+        """
         self.categorical_features = categorical_features
         self.dtype = dtype
         self.sparse = sparse
