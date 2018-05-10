@@ -57,3 +57,18 @@ def render_table(df, **kwargs):
 
     df_html = df.to_html(index=False).replace('<table border="1" class="dataframe">', prop)
     return df_html
+
+def just_transforms(pipeline, X):
+    """Applies all transforms to the data, without applying last
+       estimator.
+
+    Parameters
+    ----------
+    X : iterable
+        Data to predict on. Must fulfill input requirements of first step of
+        the pipeline.
+    """
+    Xt = X
+    for name, transform in pipeline.steps[:-1]:
+        Xt = transform.transform(Xt)
+    return Xt

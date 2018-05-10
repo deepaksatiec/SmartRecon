@@ -1,14 +1,16 @@
 import pandas as pd
 import numpy as np
-from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 from sklearn.model_selection import StratifiedKFold, train_test_split, cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MaxAbsScaler
 from tpot import TPOTClassifier
+from sklearn.pipeline import Pipeline
 
 from helper.encoding import OneHotEncoder, MultiColumnLabelEncoder
+from helper.helper import just_transforms
+
 
 AVAILABLE_ALGO = ['knn', 'random_forest', 'decision_tree', 'tpot']
 
@@ -168,4 +170,26 @@ class MachineLearningEngine:
 
     def predict(self, estimator):
         return estimator.predict(self.X)
+
+    def kneighbors(self, estimator):
+        """
+        If estimator is a knn or a pipeline with a knn as final step, finds the K-neighbors of a point.
+        :param estimator:
+        :return: array, Indices of the nearest points in the population matrix.
+        """
+        result = None
+
+        if isinstance(estimator, Pipeline):
+            lst_estimator = estimator.steps[-1][-1]
+
+            if isinstance(lst_estimator, KNeighborsClassifier):
+                result = lst_estimator.kneighbors(just_transforms(estimator, self.X), return_distance=False)
+
+        elif isinstance(estimator, KNeighborsClassifier):
+            result = estimator.kneighbors(self.X, return_distance=False)
+
+        if result is None:
+            raise ValueError("Estimator must be a knn or a Pipeline with knn in final place.")
+
+        return result
 

@@ -279,9 +279,13 @@ def previous_algo(context):
             y_true = None
 
         ml_engine = MachineLearningEngine(X=data[features], y=y_true, feat_types=feat_types)
-        y_pred = pd.DataFrame(ml_engine.predict(estimator), columns=[target + ' predicted'])
+        y_pred = pd.DataFrame(ml_engine.predict(estimator), columns=[target + " predicted"])
 
-        output_data = pd.concat([data, y_pred], axis=1)
+        kneighbors = ml_engine.kneighbors(estimator)
+        if kneighbors is not None:
+            kneighbors = pd.DataFrame(kneighbors, columns=['kneighbors'])
+
+        output_data = pd.concat([data, y_pred, kneighbors], axis=1)
         output_data.to_csv(os.path.join(app.config['OUTPUT_FOLDER'], app.config['MODEL_OUTPUT']))
 
         if target in data.columns:
@@ -300,32 +304,31 @@ def previous_algo(context):
 
 @app.route('/<string:context>/download', methods=['GET'])
 def download(context):
-    if request.method == 'GET':
 
-        chart = None
+    chart = None
 
-        if 'metrics' in session:
-            data = [
-                go.Bar(
-                    x=list(session['metrics'].keys()),
-                    y=list(session['metrics'].values()),
-                    marker=dict(
-                        color='rgb(55, 83, 109)'
-                    )
+    if 'metrics' in session:
+        data = [
+            go.Bar(
+                x=list(session['metrics'].keys()),
+                y=list(session['metrics'].values()),
+                marker=dict(
+                    color='rgb(55, 83, 109)'
                 )
-            ]
-            layout = go.Layout(
-                title='Statistics'
             )
+        ]
+        layout = go.Layout(
+            title='Statistics'
+        )
 
-            fig = go.Figure(
-                data=data,
-                layout=layout
-            )
+        fig = go.Figure(
+            data=data,
+            layout=layout
+        )
 
-            chart = offplot.plot(fig, show_link=False, output_type="div", include_plotlyjs=True)
+        chart = offplot.plot(fig, show_link=False, output_type="div", include_plotlyjs=True)
 
-        return render_template('download.html', chart=chart)
+    return render_template('download.html', chart=chart)
 
 
 if __name__ == '__main__':
